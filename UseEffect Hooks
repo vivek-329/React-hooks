@@ -1,0 +1,149 @@
+Introduction
+
+The use effect hook in React.
+Viewers are encouraged to check out Atlantic.net for a free year of hosting.
+
+
+Prerequisites
+
+Familiarity with the use state hook is recommended.
+A previous video on the basics of hooks is linked for reference.
+
+
+Key Concepts
+Resource Type Selection
+
+Users can select a resource type: posts, users, or comments.
+The selected resource type is displayed dynamically.
+
+Side Effects
+
+The use effect hook is used to handle side effects in function components.
+Unlike class components, function components do not have lifecycle methods.
+
+Basic Usage of useEffect
+
+The basic syntax involves passing a function to useEffect.
+Example:useEffect(() => {
+    console.log("render");
+});
+
+
+Reacting to Changes
+
+The effect runs every time the component renders.
+To run the effect only when the resource type changes, it can be passed as a dependency:useEffect(() => {
+    console.log("resource type changed");
+}, [resourceType]);
+
+
+Mounting Behavior
+
+An empty array as a dependency means the effect runs only on mount:useEffect(() => {
+    console.log("on mount");
+}, []);
+
+
+Simplified Side Effects
+
+The dependency array allows for a simpler approach to managing side effects compared to lifecycle methods.
+Example:
+
+If values change, the effect runs:useEffect(() => {
+    // effect logic
+}, [value1, value2, value3]);
+
+
+
+
+API Querying
+
+The video demonstrates querying an API based on the selected resource type.
+The URL is constructed using template strings to include the resource type.
+
+Example of Fetching Data
+
+The initial fetch logs data based on the selected resource type:
+
+Posts: 100 entries
+Users: 10 entries
+Comments: 500 entries
+
+No additional fetch occurs if the resource type is not changed.
+
+State Management
+
+The fetched data is stored in state using useState.
+Example:const [items, setItems] = useState([]);
+
+
+Rendering Fetched Data
+
+The fetched items can be rendered by mapping through the state.
+
+Conclusion
+
+The use effect hook is a powerful tool for managing side effects in React function components.
+Understanding how to use it effectively can simplify component behavior and data fetching.
+
+Summary of Use Effect Hook in React
+Overview of Use Effect Hook
+
+The useEffect hook is used to handle side effects in React components.
+It allows for dynamic updates based on changes in state or props.
+
+Basic Example
+
+Initial Setup:
+
+Use JSON.stringify to display items (posts, users, comments).
+Modify state based on changes using useEffect.
+
+Window Width Example:
+
+Set up a state variable for window width.
+Initially set window width to window.innerWidth.
+The value updates only on refresh without additional setup.
+
+
+
+Listening to Window Resize Events
+
+
+Event Listener Setup:
+
+Use useEffect to add an event listener for resize on component mount.
+Create a function handleResize to update window width.
+
+Cleanup on Unmount:
+
+Use a return function in useEffect to remove the event listener when the component unmounts.
+This prevents memory leaks and performance issues.
+
+
+
+Resource Type Changes
+
+
+Dynamic Resource Handling:
+
+The useEffect can run every time a resource type changes.
+Use console.log to track changes and cleanup actions.
+
+Cleanup Functionality:
+
+The return function in useEffect acts as cleanup for previous setups.
+Ensures that event listeners or subscriptions are removed properly.
+
+Key Takeaways
+
+The useEffect hook is essential for managing side effects in React.
+It can handle various scenarios like component mounting, unmounting, and state changes.
+Proper cleanup is crucial to maintain performance and avoid memory leaks.
+
+Conclusion
+
+The useEffect hook is a powerful tool in React for managing side effects.
+For further learning, consider exploring a full React course and subscribing for more content.
+
+Thank you for reading!
