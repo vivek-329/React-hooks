@@ -1,0 +1,249 @@
+Summary of React Hooks Introduction
+Overview
+
+The speaker expresses enthusiasm for React Hooks, acknowledging their complexity for beginners.
+A miniseries will cover essential React Hooks for easier understanding and immediate application.
+
+
+Getting Started with useState
+
+The first hook discussed is useState, considered the most important.
+The speaker introduces themselves as Kyle from Web Dev Simplified, aiming to simplify web development.
+
+Initial Setup
+
+
+To create a new React application, run:
+npx create-react-app
+
+
+
+The command generates boilerplate code, which can be simplified by removing unnecessary parts.
+
+
+The resulting app component includes:
+
+A minus button
+A display for the account
+A plus button
+
+
+
+Initially, the app has no functionality.
+
+
+Implementing Functionality
+
+
+To add counter functionality, the useState hook will be utilized.
+
+
+After setting up the app, modify the code in the app component and run:
+npm start
+
+
+
+Importing useState
+
+
+Import the useState hook by destructuring it from React:
+import { useState } from 'react';
+
+
+
+
+Important Considerations for Using Hooks
+
+Hooks can only be used in function components, not in class components.
+Hooks must execute in the same order on every render:
+
+Avoid placing hooks inside if statements, loops, or nested functions.
+Hooks should be at the top level of the function.
+
+
+
+“React hooks must be called in the same exact order in every component render.”
+
+
+Errors will be caught by React if hooks are misused.
+
+
+Using useState
+
+
+To use the useState hook, call it with a default state value:
+const [count, setCount] = useState(4);
+
+
+
+useState returns an array with two values:
+
+The current state (e.g., count)
+A function to update the state (e.g., setCount)
+
+
+
+It’s common to destructure the returned array for easier access.
+
+
+
+This summary provides an overview of the key points discussed regarding React Hooks, particularly focusing on the useState hook and its implementation.
+Summary of useState Hook Functionality
+Overview of useState
+
+The useState hook returns an array with:
+
+The current state value.
+A function to update that state (e.g., setCount).
+
+
+
+Setting Initial State
+
+The initial state can be set directly (e.g., 4).
+The component will re-render whenever the state is updated.
+
+
+Updating State
+Decrementing Count
+
+
+An onClick event can be set up to decrement the count:
+
+Define a function decrementCount that calls setCount with the current count minus 1.
+
+
+Important Note:
+
+Using setCount(currentCount - 1) can lead to issues if called multiple times in quick succession, as it may overwrite the state.
+
+
+Correct Way to Update State
+
+
+Use the function version of setCount to ensure updates are based on the previous state:
+
+Example: setCount(prevCount => prevCount - 1).
+
+
+This ensures that each call to decrement correctly reflects the updated state.
+
+
+Incrementing Count
+
+Similar to decrementing, create an incrementCount function to add 1 to the count.
+Set onClick for the increment button to call incrementCount.
+
+
+Performance Considerations
+
+In class components, state is set in the constructor, which runs only once.
+In function components, the initial state can be set to run every time the component renders, which may affect performance if complex calculations are involved.
+
+Using a Function for Initial State
+
+
+The useState hook can accept a function that runs only on the first render:
+
+Example: useState(() => { console.log("run function"); return 4; }).
+
+
+This approach avoids unnecessary calculations on subsequent renders.
+
+
+Conclusion
+
+The useState hook provides a simple way to manage state in functional components.
+Understanding how to correctly update state and manage performance is crucial for effective React development.
+
+Summary of React useState Hook Explanation
+
+Key Points
+
+
+Initial State Function:
+
+Use a function to set initial state to avoid re-running on every render.
+Example: Calling count initial function ensures it runs only once.
+
+
+
+State Management in Functional vs. Class Components:
+
+Functional components with useState behave differently than class components.
+When using objects in state, ensure to spread previous state to avoid overwriting.
+
+
+Setting State with Objects:
+
+Directly setting state with an object will override previous state.
+Example:
+
+Incorrect:setState({ count: previousState.count + 1 });
+
+
+Correct:setState({ ...previousState, count: previousState.count + 1 });
+
+
+
+
+Using Multiple State Hooks:
+
+It’s beneficial to use multiple useState hooks for different pieces of state.
+Example:
+
+One hook for count and another for theme.
+This prevents state clashes and simplifies management.
+
+Updating State:
+
+When updating state, ensure to use the correct setter function.
+Example:
+
+Change theme on button click:setTheme('red');
+
+Conclusion
+
+The useState hook allows for better state management in functional components.
+Using multiple state hooks simplifies the process and avoids issues with state merging.
+
+
+
+
+--- CODE IS HERE ---
+
+import React, { useState } from 'react';
+
+function App() {
+  // const [state, setState] = useState({count: 4, theme: 'blue'}) 
+  
+  const [count, setCount] = useState(4)
+  const [theme, setTheme] = useState('blue')
+  // const count = state.count
+  // const theme = state.theme
+
+
+  function decreamentCount() {
+    // setCount(prevCount => prevCount - 1)
+    // setState(prevState => {
+    // return { count: prevState.count - 1 } incoreect way
+    // return { ...prevState, count: prevState.count - 1 }  // correct way
+    // })
+    setCount(prevCount => prevCount - 1)
+  }
+  
+  function increamentCount() {
+    setCount(prevCount => prevCount + 1)
+    setTheme('red')
+  }
+
+  return (
+    <>
+      <button onClick={decreamentCount}>-</button>
+      <span>{count}</span>
+      <span>{theme}</span> 
+      <button onClick={increamentCount}>+</button>
+    </>
+  )
+}
+export default App

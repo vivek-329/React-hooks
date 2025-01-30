@@ -1,0 +1,113 @@
+Summary of React Hooks: useMemo
+
+Application Setup
+
+A simple React component called App is created.
+The component has:
+
+Two pieces of state:
+
+A number controlled by an input.
+A boolean for dark/light theme toggled by a button.
+
+
+A slow function that doubles the number using a long-running loop.
+
+
+Performance Issues
+
+Changing the number or theme causes delays due to the slow function being called on every re-render.
+React re-renders the entire component when state updates, leading to performance problems.
+
+
+Solution: useMemo
+
+The useMemo hook is introduced as a solution to optimize performance.
+Memoization is the process of caching values to avoid unnecessary recalculations.
+The slow function can be wrapped in useMemo to cache its output based on the input number.
+
+Implementation Steps
+
+Import useMemo from React.
+Use useMemo to wrap the slow function:
+
+Pass the slow function to useMemo.
+Specify dependencies (in this case, the number) to determine when to recalculate.
+
+
+Results
+
+After implementing useMemo, changing the theme becomes instantaneous.
+The slow function is only recalculated when the number changes, improving performance significantly.
+
+
+Conclusion
+
+The useMemo hook is essential for optimizing performance in React applications by preventing unnecessary recalculations of expensive functions.
+
+Summary of useMemo in React
+Overview of useMemo
+
+
+useMemo is used to optimize performance by avoiding unnecessary recalculations.
+
+
+It only recalculates values when dependencies change, reducing the need to run slow functions repeatedly.
+
+
+Performance Considerations
+
+
+Performance Overhead: Using useMemo everywhere can lead to:
+
+Additional function calls on every render.
+Increased memory usage due to storing previous values.
+
+
+Recommendation:
+
+Use useMemo only when necessary, particularly for slow functions.
+
+
+Referential Equality
+
+
+Definition: In JavaScript, comparing objects or arrays checks their references, not their values.
+
+
+Example:
+
+Two objects with identical values are not equal if they reference different locations in memory.
+
+
+Use Case:
+
+To ensure that a useEffect hook only runs when the actual object reference changes, wrap the object in useMemo.
+
+
+
+Implementation Example
+
+
+Using useEffect:
+
+A useEffect hook can be set to run when themeStyles changes.
+
+
+Problem:
+
+Changing unrelated state (like a number) can trigger the useEffect due to new object references.
+
+
+Solution:
+
+Wrap themeStyles in useMemo to maintain the same reference unless the underlying data changes.
+
+
+Key Takeaways
+
+Two Main Use Cases for useMemo:
+
+Performance Optimization: Avoid recomputation of slow functions.
+Referential Equality: Maintain the same object reference unless actual content changes.
+
